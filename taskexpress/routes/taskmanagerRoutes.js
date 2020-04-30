@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const{getProjects,postProjects,updateProjects} = require('../controllers/routesController')
+const tokenVerify = require('./jwtMiddlewear');
+const{getProjects,postProjects,updateProjects,login,register} = require('../controllers/routesController')
 
-router.get('/projects',getProjects);
+router.post('/login',login);
+
+router.post('/register',register);
+
+router.get('/projects',tokenVerify,getProjects);
 
 router.post('/projects',postProjects);
 
