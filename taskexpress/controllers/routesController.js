@@ -58,6 +58,7 @@ exports.login =async (req,res)=>{
     if(!validPassword) return res.status(400).json({error:'Invalid Password'});
 
     //create jwt token for user
-    let token =await jwt.sign({_id:userExists._id},process.env.SECRET_TOKEN)
-    return res.header('auth-token',token).json(userExists)
+    let token =await jwt.sign({_id:userExists._id},process.env.SECRET_TOKEN);
+    console.log(res.headers);
+    return res.header('auth-token',token).json({name:userExists.name,_id:userExists._id,token:token,email:userExists.email})
 }
